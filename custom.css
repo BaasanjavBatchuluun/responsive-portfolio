@@ -3,8 +3,53 @@ body {
   background: #0f172a;
   color: #e2e8f0;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
+h1, h2, h3, h4, h5, h6,
+p, span, li, label, a {
+  color: #e2e8f0;
+}
+
+.text-muted {
+  color: #94a3b8 !important;
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #38bdf8, #a78bfa);
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 2000;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cursor-blink {
+  animation: blink 0.9s step-end infinite;
+  color: #38bdf8;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
 .navbar {
   background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(8px);
@@ -47,9 +92,73 @@ body {
 }
 
 .hero {
+  position: relative;
   min-height: 100vh;
-  background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.15), transparent 45%), radial-gradient(circle at 10% 80%, rgba(167, 139, 250, 0.12), transparent 45%), #0f172a;
+  background: #0f172a;
   padding-top: 80px;
+  overflow: hidden;
+}
+
+.aurora {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  z-index: 0;
+  pointer-events: none;
+}
+.aurora--one {
+  width: 420px;
+  height: 420px;
+  top: -100px;
+  right: -80px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.55), transparent 70%);
+  animation: drift-one 14s ease-in-out infinite;
+}
+.aurora--two {
+  width: 360px;
+  height: 360px;
+  bottom: -120px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.5), transparent 70%);
+  animation: drift-two 16s ease-in-out infinite;
+}
+.aurora--three {
+  width: 260px;
+  height: 260px;
+  top: 40%;
+  left: 55%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.3), transparent 70%);
+  animation: drift-three 12s ease-in-out infinite;
+}
+
+@keyframes drift-one {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 30px) scale(1.08);
+  }
+}
+@keyframes drift-two {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.1);
+  }
+}
+@keyframes drift-three {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-25px, -25px) scale(0.9);
+  }
+}
+.hero .container {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-eyebrow {
@@ -74,8 +183,9 @@ body {
 }
 
 .about-card {
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 32px;
   text-align: center;
@@ -95,15 +205,18 @@ body {
 }
 
 .project-card {
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 28px 22px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 .project-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 14px 28px rgba(56, 189, 248, 0.15);
+  box-shadow: 0 16px 32px rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.4);
 }
 .project-card h3 {
   font-size: 1.15rem;
@@ -120,15 +233,17 @@ body {
 }
 
 .fav-card {
-  background: #1e293b;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 16px;
   padding: 26px 16px;
   height: 100%;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 .fav-card:hover {
   transform: translateY(-4px);
+  border-color: rgba(167, 139, 250, 0.4);
 }
 .fav-card h4 {
   font-size: 1rem;
